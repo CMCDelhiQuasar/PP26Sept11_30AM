@@ -11,6 +11,14 @@ import in.pulseinfotech.printphoto.services.logging.PrintPhotoLogger.LOG;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  * This class keeps track of all the orders that had been placed through the
  * system. It generates an unique id and holds details like references of
@@ -44,17 +52,20 @@ import java.util.Date;
  * @see OrderStatus
  * @see Address
  */
+@Entity
 public class OrderTrack {
 	private static String FQCN = OrderTrack.class.getName();
 	/**
 	 * This field holds an id to uniquely identify an {@link Order} and trace
 	 * its path.
 	 */
+	@Id
 	private long trackingId;
 
 	/**
 	 * This field holds a reference of {@link Order}
 	 */
+	@OneToOne
 	private Order order;
 
 	/**
@@ -62,29 +73,34 @@ public class OrderTrack {
 	 * 
 	 * @see OrderStatus
 	 */
+	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 
 	/**
 	 * This field holds the date when the {@link Order} was dispatched.
 	 */
+	@Temporal(TemporalType.DATE)
 	private Date shipmentDate;
 
 	/**
 	 * This field holds the proposed date when the {@link Order} was supposed to
 	 * be dispatched.
 	 */
+	@Temporal(TemporalType.DATE)
 	private Date proposedDeliveryDate;
 
 	/**
 	 * This field holds the actual date when the {@link Order} was really
 	 * dispatched.
 	 */
+	@Temporal(TemporalType.DATE)
 	private Date actualDeliveryDate;
 
 	/**
 	 * This field holds the {@link Address} to where the {@link Order} was
 	 * dispatched.
 	 */
+	@Temporal(TemporalType.DATE)
 	private Address deliveryAddress;
 
 	/**
@@ -97,6 +113,7 @@ public class OrderTrack {
 	 * 
 	 */
 
+	@OneToOne
 	private Shipper shipper;
 
 	/**

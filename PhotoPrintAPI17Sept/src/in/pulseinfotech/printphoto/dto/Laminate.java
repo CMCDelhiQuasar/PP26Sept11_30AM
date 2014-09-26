@@ -1,8 +1,9 @@
 package in.pulseinfotech.printphoto.dto;
 
+import javax.persistence.OneToOne;
 
 /**
- * This is class holds the details of a laminate.  
+ * This is class holds the details of a laminate.
  * 
  * @author Raman Ahuja
  * @version 1.0
@@ -12,12 +13,10 @@ package in.pulseinfotech.printphoto.dto;
  * 
  * 
  */
-public class Laminate extends Product{
-	private Photo laminatePhoto;
+public class Laminate extends Product {
 
-	public void Laminate() {
-		laminatePhoto = new Photo();
-	}
+	@OneToOne
+	private Photo laminatePhoto;
 
 	public Photo getLaminatePhoto() {
 		return laminatePhoto;

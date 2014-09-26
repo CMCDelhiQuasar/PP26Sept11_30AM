@@ -1,11 +1,16 @@
 package in.pulseinfotech.printphoto.dto;
 
-import in.pulseinfotech.printphoto.exception.ProductIdException;
 import in.pulseinfotech.printphoto.exception.ShipmentReceiptIDException;
 import in.pulseinfotech.printphoto.exception.ShipperIdException;
-import in.pulseinfotech.printphoto.services.communication.MailService;
 import in.pulseinfotech.printphoto.services.logging.PrintPhotoLogger;
 import in.pulseinfotech.printphoto.services.logging.PrintPhotoLogger.LOG;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 
@@ -20,11 +25,13 @@ import in.pulseinfotech.printphoto.services.logging.PrintPhotoLogger.LOG;
  * <br>
  * 
  */
+@Entity
 public class Shipper {
 	private static String FQCN = Shipper.class.getName();
 	/**
 	 * This field holds id to uniquely identify a shipper
 	 */
+	@Id
 	private long shipperId;
 
 	/**
@@ -46,12 +53,14 @@ public class Shipper {
 	 * This field holds the date the shipment was handed over to the shipment
 	 * company
 	 */
-	private String dateOfHandover;
+	@Temporal(TemporalType.DATE)
+	private Date dateOfHandover;
 
 	/**
 	 * This field holds the date the shipment was delivered to the customer
 	 */
-	private String dateOfDelivery;
+	@Temporal(TemporalType.DATE)
+	private Date dateOfDelivery;
 
 	/**
 	 * 
@@ -135,35 +144,19 @@ public class Shipper {
 		}
 	}
 
-	/**
-	 * 
-	 * @return Date Of Handover
-	 */
-	public String getDateOfHandover() {
+	public Date getDateOfHandover() {
 		return dateOfHandover;
 	}
 
-	/**
-	 * 
-	 * @param dateOfHandover
-	 */
-	public void setDateOfHandover(String dateOfHandover) {
+	public void setDateOfHandover(Date dateOfHandover) {
 		this.dateOfHandover = dateOfHandover;
 	}
 
-	/**
-	 * 
-	 * @return DateOfDelivery
-	 */
-	public String getDateOfDelivery() {
+	public Date getDateOfDelivery() {
 		return dateOfDelivery;
 	}
 
-	/**
-	 * 
-	 * @param dateOfDelivery
-	 */
-	public void setDateOfDelivery(String dateOfDelivery) {
+	public void setDateOfDelivery(Date dateOfDelivery) {
 		this.dateOfDelivery = dateOfDelivery;
 	}
 

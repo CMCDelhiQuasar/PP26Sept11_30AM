@@ -1,5 +1,11 @@
 package in.pulseinfotech.printphoto.dto;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import in.pulseinfotech.printphoto.exception.DimensionException;
 import in.pulseinfotech.printphoto.exception.PaperTypeException;
 import in.pulseinfotech.printphoto.exception.ProductIdException;
 import in.pulseinfotech.printphoto.services.communication.MailService;
@@ -15,17 +21,26 @@ import in.pulseinfotech.printphoto.services.logging.PrintPhotoLogger.LOG;
  * <br>
  * <br>
  */
+@Entity
 public class Product {
 	private static String FQCN = Product.class.getName();
 	/**
 	 * This field holds the product id
 	 */
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long productId;
 
 	/**
 	 * This field holds the comment
 	 */
 	private String productComment;
+
+	/**
+	 * This field holds the reference of the {@link Dimension} class which
+	 * defines the length and width of the image.
+	 */
+	private Dimension dimension;
 
 	/**
 	 * 
@@ -64,6 +79,33 @@ public class Product {
 	 */
 	public void setProductComment(String productComment) {
 		this.productComment = productComment;
+	}
+
+	/**
+	 * 
+	 * @return reference to {@link Dimension}
+	 */
+	public Dimension getDimension() {
+		return dimension;
+	}
+
+	/**
+	 * 
+	 * @param dimension
+	 * @see Dimension
+	 * @throws DimensionException
+	 */
+	public void setDimension(Dimension dimension) throws DimensionException {
+		if (dimension != null) {
+			this.dimension = dimension;
+		} else {
+			PrintPhotoLogger.log4j(FQCN, LOG.ERROR,
+					"Null reference received for dimension",
+					new DimensionException(
+							"Null reference received for dimension"));
+			throw new DimensionException(
+					"Null reference received for dimension");
+		}
 	}
 
 }

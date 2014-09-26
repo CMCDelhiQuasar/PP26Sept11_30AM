@@ -1,7 +1,9 @@
 package in.pulseinfotech.printphoto.dto;
 
+import javax.persistence.OneToOne;
+
 /**
- * This is class holds the details of a Frame.  
+ * This is class holds the details of a Frame.
  * 
  * @author Raman Ahuja
  * @version 1.0
@@ -12,11 +14,9 @@ package in.pulseinfotech.printphoto.dto;
  * 
  */
 public class Frame extends Product {
-	private Photo framePhoto;
 
-	public void Frame() {
-		framePhoto = new Photo();
-	}
+	@OneToOne
+	private Photo framePhoto;
 
 	public Photo getFramePhoto() {
 		return framePhoto;

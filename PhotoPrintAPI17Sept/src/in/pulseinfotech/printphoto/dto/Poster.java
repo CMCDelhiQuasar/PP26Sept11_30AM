@@ -1,5 +1,7 @@
 package in.pulseinfotech.printphoto.dto;
 
+import javax.persistence.OneToOne;
+
 /**
  * This is class holds the details of a poster.
  * 
@@ -12,11 +14,9 @@ package in.pulseinfotech.printphoto.dto;
  * 
  */
 public class Poster extends Product {
-	private Photo photoPoster;
 
-	public void Poster() {
-		photoPoster = new Photo();
-	}
+	@OneToOne
+	private Photo photoPoster;
 
 	public Photo getPhotoPoster() {
 		return photoPoster;

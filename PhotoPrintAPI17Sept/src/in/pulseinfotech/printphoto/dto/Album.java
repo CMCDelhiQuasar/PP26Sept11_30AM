@@ -1,6 +1,9 @@
 package in.pulseinfotech.printphoto.dto;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.OneToMany;
 
 /**
  * This is class holds the details of an Album.
@@ -14,13 +17,16 @@ import java.util.ArrayList;
  * 
  */
 public class Album extends Product {
-	private ArrayList<Photo> albumPhotos = new ArrayList<>();
 
-	public ArrayList<Photo> getAlbumPhotos() {
+	@OneToMany
+	private List<Photo> albumPhotos = new ArrayList<>();
+
+	public List<Photo> getAlbumPhotos() {
 		return albumPhotos;
 	}
 
-	public void setAlbumPhotos(ArrayList<Photo> albumPhotos) {
+	public void setAlbumPhotos(List<Photo> albumPhotos) {
 		this.albumPhotos = albumPhotos;
 	}
+
 }

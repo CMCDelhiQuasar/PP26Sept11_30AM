@@ -1,5 +1,8 @@
 package in.pulseinfotech.printphoto.dto;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 import in.pulseinfotech.printphoto.exception.AddressException;
 import in.pulseinfotech.printphoto.exception.DimensionException;
 import in.pulseinfotech.printphoto.exception.PaperTypeException;
@@ -35,14 +38,9 @@ public class Photo extends Product {
 	private String fileName;
 
 	/**
-	 * This field holds the reference of the {@link Dimension} class which
-	 * defines the length and width of the image.
-	 */
-	private Dimension dimension;
-
-	/**
 	 * This field holds the {@link PaperType}.
 	 */
+	@Enumerated(EnumType.STRING)
 	private PaperType paperType;
 
 	/**
@@ -60,33 +58,6 @@ public class Photo extends Product {
 	 */
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
-	}
-
-	/**
-	 * 
-	 * @return reference to {@link Dimension}
-	 */
-	public Dimension getDimension() {
-		return dimension;
-	}
-
-	/**
-	 * 
-	 * @param dimension
-	 * @see Dimension
-	 * @throws DimensionException
-	 */
-	public void setDimension(Dimension dimension) throws DimensionException {
-		if (dimension != null) {
-			this.dimension = dimension;
-		} else {
-			PrintPhotoLogger.log4j(FQCN, LOG.ERROR,
-					"Null reference received for dimension",
-					new DimensionException(
-							"Null reference received for dimension"));
-			throw new DimensionException(
-					"Null reference received for dimension");
-		}
 	}
 
 	/**

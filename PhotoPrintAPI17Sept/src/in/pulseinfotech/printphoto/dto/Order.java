@@ -4,14 +4,16 @@ import in.pulseinfotech.printphoto.dto.payment.Payment;
 import in.pulseinfotech.printphoto.exception.AddressException;
 import in.pulseinfotech.printphoto.exception.OrderIDException;
 import in.pulseinfotech.printphoto.exception.UserException;
-import in.pulseinfotech.printphoto.services.communication.MailService;
 import in.pulseinfotech.printphoto.services.logging.PrintPhotoLogger;
 import in.pulseinfotech.printphoto.services.logging.PrintPhotoLogger.LOG;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -45,6 +47,7 @@ public class Order {
 	 * This member variable holds an id to uniquely identify an order
 	 */
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long orderId;
 
 	/**
@@ -59,12 +62,13 @@ public class Order {
 	 * for.
 	 */
 	@OneToMany
-	private ArrayList<Product> productList;
+	private List<Product> productList = new ArrayList<Product>();
 
 	/**
 	 * This member variable holds the address to where the order is to be
 	 * delivered. This is a reference of the {@link Address} class.
 	 */
+	@Embedded
 	private Address deliveryAddress;
 
 	/**
@@ -146,7 +150,7 @@ public class Order {
 	 * 
 	 * @return The list of product ordered.
 	 */
-	public ArrayList<Product> getProductList() {
+	public List<Product> getProductList() {
 		return productList;
 	}
 
@@ -155,7 +159,7 @@ public class Order {
 	 * @param productList
 	 *            Sets the list of product ordered
 	 */
-	public void setProductList(ArrayList<Product> productList) {
+	public void setProductList(List<Product> productList) {
 		this.productList = productList;
 	}
 
